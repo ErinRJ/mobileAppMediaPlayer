@@ -7,8 +7,8 @@
     tools:context=".ModifyActivity">
 
     <LinearLayout
-        android:layout_width="409dp"
-        android:layout_height="729dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_marginStart="1dp"
         android:layout_marginTop="1dp"
         android:orientation="vertical"
@@ -47,7 +47,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="New Track Name" />
+                android:text="New URL" />
 
             <EditText
                 android:id="@+id/name_input"
@@ -65,11 +65,20 @@
             android:layout_height="wrap_content"
             android:text="MODIFY" />
 
-        <Button
-            android:id="@+id/back_btn"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="BACK" />
+            android:layout_height="0dp"
+            android:orientation="horizontal"
+            android:gravity="center|bottom"
+            android:layout_weight="1">
+            <Button
+                android:id="@+id/back_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="BACK"
+                android:onClick="back"
+                android:layout_weight="0"/>
+        </LinearLayout>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

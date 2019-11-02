@@ -81,4 +81,18 @@ public final class Contract extends SQLiteOpenHelper {
         Log.d(TAG, "found the url: " + url);
         return url;
     }
+
+    //delete the row from the database
+    public boolean delete(String name){
+        SQLiteDatabase db = this.getWritableDatabase();
+        long result = db.delete(TABLE_NAME, COLUMN_NAME + " = ?", new String[] {name});
+        Log.d(TAG, name + " has been deleted from the database");
+        //ensure the track has been properly removed
+        if(result == -1){
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
 }

@@ -26,7 +26,8 @@
             android:id="@+id/search_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="SEARCH AND DELETE/MODIFY" />
+            android:text="SEARCH AND DELETE/MODIFY"
+            android:onClick="search"/>
 
         <Button
             android:id="@+id/playlist_btn"
