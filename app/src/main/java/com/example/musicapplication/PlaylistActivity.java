@@ -80,6 +80,7 @@ public class PlaylistActivity extends AppCompatActivity {
 
     //download and play the song
     public void downloadAndPlay(View view) {
+        boolean resuming = false;
         //make sure the user has selected a song from the playlist
         if(play_url.equals("")){
             Toast.makeText(getApplicationContext(), "Please select a song to play", Toast.LENGTH_SHORT).show();
@@ -92,6 +93,7 @@ public class PlaylistActivity extends AppCompatActivity {
                 player = new MediaPlayer();
             }else {
                 if (paused) {
+                    resuming = true;
                     resume();
                 } else {
                     //stop currently playing music
@@ -102,22 +104,24 @@ public class PlaylistActivity extends AppCompatActivity {
             }
         }
 
-        try {
-            //pass the url to be played
-            player.setDataSource(play_url);
-            //prepare the song, listen for when it's prepared
-            player.prepareAsync();
-            player.setOnPreparedListener(new MediaPlayer.OnPreparedListener(){
-                @Override
-                public void onPrepared(MediaPlayer mp) {
-                    //when the media is prepared, perform the following code:
+        if(!resuming) {
+            try {
+                //pass the url to be played
+                player.setDataSource(play_url);
+                //prepare the song, listen for when it's prepared
+                player.prepareAsync();
+                player.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                    @Override
+                    public void onPrepared(MediaPlayer mp) {
+                        //when the media is prepared, perform the following code:
 //                    currentPosition = 0;
-                    player.start();
-                    Toast.makeText(getApplicationContext(), "The song is prepared", Toast.LENGTH_SHORT).show();
-                }
-            });
-        } catch (IOException e) {
-            e.printStackTrace();
+                        player.start();
+                        Toast.makeText(getApplicationContext(), "The song is prepared", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 

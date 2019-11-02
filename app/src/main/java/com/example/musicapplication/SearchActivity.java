@@ -15,7 +15,7 @@ public class SearchActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
-        name = (EditText)findViewById(R.id.name_input);
+        name = (EditText)findViewById(R.id.url_txt);
         database = new Contract(this);
     }
 
@@ -39,7 +39,11 @@ public class SearchActivity extends AppCompatActivity {
     }
 
     public void modify(View view) {
+        //get the inputted track name
+        String track = name.getText().toString();
+        //bundle it up and send it over to the modify activity
         Intent intent = new Intent(this, ModifyActivity.class);
+        intent.putExtra("name", track);
         startActivity(intent);
     }
 }
