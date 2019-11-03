@@ -22,7 +22,7 @@ public class AddActivity extends AppCompatActivity {
 
         //find the editText boxes
         urlTxt = findViewById(R.id.name_txt);
-        nameTxt = findViewById(R.id.url_txt);
+        nameTxt = findViewById(R.id.name_txt);
     }
 
     //go back to main page

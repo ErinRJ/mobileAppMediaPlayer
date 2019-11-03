@@ -6,16 +6,29 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class SearchActivity extends AppCompatActivity {
     Contract database;
     EditText name;
+    TextView urlTxt;
+    TextView nameTxt;
+    TextView urlLabel;
+    TextView nameLabel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
-        name = (EditText)findViewById(R.id.url_txt);
+
+        name = (EditText)findViewById(R.id.name_txt);
+        urlTxt = (TextView)findViewById(R.id.urlResult);
+        nameTxt = (TextView)findViewById(R.id.nameResult);
+        nameLabel = (TextView)findViewById(R.id.nameLabel);
+        urlLabel = (TextView)findViewById(R.id.urlLabel);
+
         database = new Contract(this);
     }
 
@@ -52,6 +65,19 @@ public class SearchActivity extends AppCompatActivity {
             Intent intent = new Intent(this, ModifyActivity.class);
             intent.putExtra("name", track);
             startActivity(intent);
+        }
+    }
+
+    public void search(View view) {
+        //get the track name entered by the user
+        String track = name.getText().toString();
+        String url = database.getTrack(track);
+        if(url.equals("URL not found")){
+            Toast.makeText(getApplicationContext(), "That track name doesn't exist in the playlist", Toast.LENGTH_SHORT).show();
+        }
+        else{
+            nameTxt.setText(track);
+            urlTxt.setText(url);
         }
     }
 }
