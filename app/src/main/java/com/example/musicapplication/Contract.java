@@ -76,10 +76,15 @@ public final class Contract extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(query, new String[]{name});
         //put the url in a string and return it
         int url_index = cursor.getColumnIndex(COLUMN_URL);
-        cursor.moveToFirst();
-        String url = cursor.getString(url_index);
-        Log.d(TAG, "found the url: " + url);
-        return url;
+        if(cursor.moveToFirst()){
+            String url = cursor.getString(url_index);
+            Log.d(TAG, "found the url: " + url);
+            return url;
+        }
+        else{
+            return "URL not found";
+        }
+
     }
 
     //delete the row from the database
@@ -89,6 +94,30 @@ public final class Contract extends SQLiteOpenHelper {
         Log.d(TAG, name + " has been deleted from the database");
         //ensure the track has been properly removed
         if(result == -1){
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
+
+    //update a row of the database with the given information
+    public boolean update(String oldName, String name, String url){
+        Log.d(TAG, "reached the update() function (Contract.java)");
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        //put the new values in a ContentValues object
+        ContentValues args = new ContentValues();
+        args.put(COLUMN_URL, url);
+        args.put(COLUMN_NAME, name);
+
+        String whereclause = COLUMN_NAME + " LIKE ?";
+        String[] oldN = new String[] {String.valueOf(oldName)};
+
+        //update the database
+        long result = db.update(TABLE_NAME, args, whereclause, oldN);
+        //check if it was updated properly
+        if(result==-1){
             return false;
         }
         else{

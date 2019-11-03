@@ -41,9 +41,17 @@ public class SearchActivity extends AppCompatActivity {
     public void modify(View view) {
         //get the inputted track name
         String track = name.getText().toString();
-        //bundle it up and send it over to the modify activity
-        Intent intent = new Intent(this, ModifyActivity.class);
-        intent.putExtra("name", track);
-        startActivity(intent);
+
+        //make sure that the track name exists in the playlist database
+        String url = database.getTrack(track);
+        if(url.equals("URL not found")){
+            Toast.makeText(getApplicationContext(), "That track name doesn't exist in the playlist", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            //bundle it up and send it over to the modify activity
+            Intent intent = new Intent(this, ModifyActivity.class);
+            intent.putExtra("name", track);
+            startActivity(intent);
+        }
     }
 }

@@ -63,7 +63,8 @@
             android:id="@+id/mod_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="MODIFY" />
+            android:text="MODIFY"
+            android:onClick="modify"/>
 
         <LinearLayout
             android:layout_width="match_parent"
