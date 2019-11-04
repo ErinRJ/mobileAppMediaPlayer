@@ -20,7 +20,7 @@ public class ModifyActivity extends AppCompatActivity {
         setContentView(R.layout.activity_modify);
 
         nameTxt = (EditText)findViewById(R.id.name_txt);
-        urlTxt = (EditText)findViewById(R.id.name_txt);
+        urlTxt = (EditText)findViewById(R.id.url_txt);
 
         helper = new Contract(this);
         //on page creation, the track name and url should already be populated

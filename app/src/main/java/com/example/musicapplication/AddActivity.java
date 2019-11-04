@@ -21,7 +21,7 @@ public class AddActivity extends AppCompatActivity {
         database = new Contract(this);
 
         //find the editText boxes
-        urlTxt = findViewById(R.id.name_txt);
+        urlTxt = findViewById(R.id.url_txt);
         nameTxt = findViewById(R.id.name_txt);
     }
 

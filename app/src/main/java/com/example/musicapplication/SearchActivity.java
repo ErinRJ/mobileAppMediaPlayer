@@ -4,9 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,6 +17,9 @@ public class SearchActivity extends AppCompatActivity {
     TextView nameTxt;
     TextView urlLabel;
     TextView nameLabel;
+
+    private static final String TAG = "database";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +43,7 @@ public class SearchActivity extends AppCompatActivity {
     public void delete(View view) {
         //get the track name entered by the user
         String track = name.getText().toString();
+        Log.d(TAG, "Inputted: " + track + "in SearchActivity.delete()");
         //call the delete() in the database class
         Boolean result = database.delete(track);
         //give Toast message to user indicating whether it has been removed properly
